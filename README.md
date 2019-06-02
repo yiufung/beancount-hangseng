@@ -9,8 +9,9 @@ Currently only **Savings** account is supported.
 
 ## Installation
 
-1. Install dependencies `pdftotext`. This is normally packaged under `poppler`
-   for most Linux distros. Windows user may try with
+1. Install external dependency `pdftotext`. This is normally packaged under
+   [`poppler`](https://poppler.freedesktop.org/) for most Linux distros. Windows
+   user may try with
    [this](https://github.com/jalan/pdftotext/issues/16#issuecomment-399963100).
 
 2. Install this package via `pip`:
