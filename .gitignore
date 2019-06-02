@@ -11,3 +11,7 @@ beancount-venv/*
 /beancount_hangseng/sample1.pdf.file_account
 /beancount_hangseng/sample1.pdf.file_date
 /beancount_hangseng/sample1.pdf.file_name
+/build
+/dist
+/beancount_hangseng.egg-info
+/README.org
