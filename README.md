@@ -13,7 +13,9 @@ Currently only **Savings** account is supported.
 
 ## Beancount
 
-1.  Import `HangSengSavingsImporter` to your import config (See [config.py](https://github.com/yiufung/beancount-hangseng/blob/master/config.py))
+1.  Import `HangSengSavingsImporter` to your import config (See
+    [config.py](https://github.com/yiufung/beancount-hangseng/blob/master/config.py)
+    for example)
 2.  Run `bean-extract config.py /path/to/eStatement.pdf > output.beancount`
 
 ## CSV
