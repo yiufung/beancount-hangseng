@@ -14,7 +14,3 @@ from beancount_hangseng import hangseng_pdf
 CONFIG = [
     hangseng_pdf.Importer("Assets:HK:HangSeng:Savings")
 ]
-
-
-# Override the header on extracted text (if desired).
-extract.HEADER = ';; -*- mode: org; mode: beancount; coding: utf-8; -*-\n'
