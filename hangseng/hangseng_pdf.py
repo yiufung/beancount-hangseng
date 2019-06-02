@@ -101,7 +101,7 @@ class Importer(importer.ImporterProtocol):
             # easier post-process.
             line = lines[line_no]
             post_date, title, deposit, withdraw, balance = [x.decode().strip() for x in struct.unpack('11s58s29s31s24s', str.encode(line.ljust(153)))]
-            print("Date: {} Title: {} Deposit: {} Title: {}  Balance: {}".format(post_date, title, deposit, withdraw, balance))
+            # print("Date: {} Title: {} Deposit: {} Title: {}  Balance: {}".format(post_date, title, deposit, withdraw, balance))
             trans_title = ' '.join([trans_title, ' '.join(title.split())])
             if post_date:  # update transaction date
                 trans_date = datetime.strptime(post_date, '%d %b')
