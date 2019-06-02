@@ -45,7 +45,7 @@ def pdf_to_text(filename):
     return stdout.decode()
 
 
-class Importer(importer.ImporterProtocol):
+class HangSengSavingsImporter(importer.ImporterProtocol):
     """An importer for Hang Seng Bank PDF statements."""
 
     def __init__(self, account_filing):

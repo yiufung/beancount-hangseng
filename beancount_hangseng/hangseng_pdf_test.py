@@ -6,10 +6,8 @@ from os import path
 import pytest
 
 from beancount.ingest import regression_pytest as regtest
-from . import hangseng_pdf
 
-
-IMPORTER = hangseng_pdf.Importer("Assets:HK:HangSeng")
+IMPORTER = HangSengSavingsImporter("Assets:HK:HangSeng")
 
 @pytest.mark.skipif(not hangseng_pdf.is_pdftotext_installed(),
                     reason="pdftotext is not installed")
