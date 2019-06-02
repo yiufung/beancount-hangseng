@@ -8,7 +8,7 @@ from os import path
 sys.path.insert(0, path.join(path.dirname(__file__)))
 
 from beancount.ingest import extract
-from hangseng import hangseng_pdf
+from beancount_hanseng import hangseng_pdf
 
 # Setting this variable provides a list of importer instances.
 CONFIG = [
