@@ -1,15 +1,15 @@
-# Beancount/CSV parser for Hang Seng eStatements
+# Beancount/CSV parser for Hang Seng e-Statement
 
 [![PyPI version fury.io](https://badge.fury.io/py/beancount-hangseng.svg)](https://pypi.python.org/pypi/beancount-hangseng/)
 
-Parse Hang Seng Integrated Account eStatements PDF, import to beancount, or
-export as CSV. Currently only **Savings** account is supported.
+Parse Hang Seng (Hong Kong) Integrated Account e-Statement PDF, output results
+as beancount or CSV. Only **Savings** account is supported at the moment.
 
 ## Installation
 
 1. Install external dependency `pdftotext`. This is normally packaged under
    [`poppler`](https://poppler.freedesktop.org/) for most Linux distros. Windows
-   user may try with
+   users may try with
    [this](https://github.com/jalan/pdftotext/issues/16#issuecomment-399963100).
 
 2. Install package via `pip`:
