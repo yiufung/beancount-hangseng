@@ -20,16 +20,16 @@ from beancount_hangseng import utils
 class HangSengSavingsImporter(importer.ImporterProtocol):
     """An importer for Hang Seng Bank PDF statements."""
 
-    def __init__(self, account_filing, currency):
+    def __init__(self, account_filing, currency, debug=False):
         self.account_filing = account_filing
         self.currency = currency
+        self.debug = debug
 
     def identify(self, f):
-        # HangSeng should only have PDF eStatement
         if f.mimetype() != 'application/pdf':
             return False
-        # The name "HANG SENG BANK" is in the logo as image, so we use bank code
-        # instead, which is 024. Hope that doesn't crash with others.
+        # The name "HANG SENG BANK" is in the logo as image, use bank code to
+        # identify instead, which is 024.
         text = f.convert(utils.pdf_to_text)
         if text:
             return re.search('Bank code +024', text) is not None
@@ -41,24 +41,23 @@ class HangSengSavingsImporter(importer.ImporterProtocol):
         # break (\n\n\n), or when it ends with the row of "Transaction Summary"
         SAVINGS_REGEXP = "Integrated Account Statement Savings\n.*\n.*\n\n(?P<record>(.|\n)*?)(?=\n\n\n\n|Transaction Summary)"
         allmatches = re.findall(SAVINGS_REGEXP, text)
-        # For each match, the 2nd item is the ending page break or 'Transaction
-        # Summary', which we don't need. So we concatenate all matches only at index 0.
+        # For each match result, the 2nd group is the ending page break or
+        # 'Transaction Summary', which we don't need.
         record_corpus = '\n'.join(match[0] for match in allmatches)
         return self.get_txns_from_text(record_corpus, f)
 
     def file_name(self, f):
-        # Normalize the name to something meaningful.
         return "HangSeng_{}_{}.pdf".format(self.file_account(f), self.file_date(f).strftime("%Y%m%d"))
 
     def file_account(self, f):
-        # Get the actual statement's date from the contents of the file.
+        # Get account from eStatement
         text = f.convert(utils.pdf_to_text)
         match = re.search('Account Number +(.*)', text)
         if match:
             return match.group(1)
 
     def file_date(self, f):
-        # Get the actual statement's date from the contents of the file.
+        # Get statement date from eStatement
         text = f.convert(utils.pdf_to_text)
         match = re.search('Statement Date +(.*)', text)
         if match:
@@ -74,8 +73,9 @@ class HangSengSavingsImporter(importer.ImporterProtocol):
             # easier post-process.
             line = lines[line_no]
             post_date, title, deposit, withdraw, balance = [x.decode().strip() for x in struct.unpack('11s58s29s31s24s', str.encode(line.ljust(153)))]
-            # print("Date: {} Title: {} Deposit: {} Title: {}  Balance: {}".format(post_date, title, deposit, withdraw, balance))
             trans_title = ' '.join([trans_title, ' '.join(title.split())])
+            if self.debug:
+                print("{0: >10} {1: >30} Deposit: {2: >15} Withdraw: {3: >15}  Balance: {4: >15}".format(post_date, title, deposit, withdraw, balance))
             if post_date:  # update transaction date
                 trans_date = datetime.strptime(post_date, '%d %b')
                 # Cross-year handling
@@ -90,7 +90,7 @@ class HangSengSavingsImporter(importer.ImporterProtocol):
                     payee=trans_title.strip(),
                     date=trans_date,
                     flag=flags.FLAG_OKAY,
-                    narration="",  # Prepare narration for user to input comment
+                    narration="",
                     tags=set(),
                     links=set(),
                     postings=[],
