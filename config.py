@@ -8,9 +8,9 @@ from os import path
 sys.path.insert(0, path.join(path.dirname(__file__)))
 
 from beancount.ingest import extract
-from beancount_hangseng import hangseng_pdf
+from beancount_hangseng import HangSengSavingsImporter
 
 # Setting this variable provides a list of importer instances.
 CONFIG = [
-    hangseng_pdf.Importer("Assets:HK:HangSeng:Savings")
+    HangSengSavingsImporter("Assets:HK:HangSeng:Savings")
 ]

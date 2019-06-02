@@ -6,11 +6,12 @@ from os import path
 import pytest
 
 from beancount.ingest import regression_pytest as regtest
+from beancount_hangseng import HangSengSavingsImporter, utils
 
 IMPORTER = HangSengSavingsImporter("Assets:HK:HangSeng")
 
-@pytest.mark.skipif(not hangseng_pdf.is_pdftotext_installed(),
-                    reason="pdftotext is not installed")
+@pytest.mark.skipif(not utils.is_pdftotext_installed(),
+                    reason="beancount_hangseng depends on pdftotext. Please install.")
 @regtest.with_importer(IMPORTER)
 @regtest.with_testdir(path.dirname(__file__))
 class TestImporter(regtest.ImporterTestBase):
