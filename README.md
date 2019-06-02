@@ -1,6 +1,6 @@
 # Beancount Importer for Hang Seng eStatements
 
-[![PyPI version fury.io](https://badge.fury.io/py/beancount-hangseng.svg)](https://pypi.python.org/pypi/beancount-hangseng/)
+[![PyPI version fury.io](https://badge.fury.io/py/beancount-hangseng.avg)](https://pypi.python.org/pypi/beancount-hangseng/)
 
 Imports Hang Seng Integrated Account eStatements to beancount. CSV output can be
 obtained through `bean-report` afterwards.
@@ -9,7 +9,13 @@ Currently only **Savings** account is supported.
 
 ## Installation
 
-    pip install beancount-hangseng
+1. Install dependencies `pdftotext`. This is normally packaged under `poppler`
+   for most Linux distros. Windows user may try with
+   [this](https://github.com/jalan/pdftotext/issues/16#issuecomment-399963100).
+
+2. Install this package via `pip`:
+
+        pip install beancount-hangseng
 
 ## Beancount
 
