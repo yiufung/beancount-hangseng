@@ -1,5 +1,7 @@
 # Beancount Importer for Hang Seng eStatements
 
+[![PyPI version fury.io](https://badge.fury.io/py/beancount-hangseng.svg)](https://pypi.python.org/pypi/beancount-hangseng/)
+
 Imports Hang Seng Integrated Account eStatements to beancount. CSV output can be
 obtained through `bean-report` afterwards.
 
