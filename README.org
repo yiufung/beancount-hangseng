@@ -1,7 +1,9 @@
 * Beancount Importer / CSV converter for Hang Seng eStatements
 
-~beancount-hangseng~ provides an Importer to translate Hang Seng PDF eStatements
-to beancount or csv. Currently *Savings* account is supported.
+~beancount-hangseng~ imports Hang Seng Integrated Account eStatements to
+beancount. CSV output is available through ~bean-report~.
+
+Currently *Savings* account is supported.
 
 ** Beancount
 
@@ -10,8 +12,8 @@ to beancount or csv. Currently *Savings* account is supported.
 
 ** CSV
 
-CSV generation relies on ~bean-report~ tool provided by ~beancount~. Follow above
-steps to generate ~output.beancount~, then convert it to CSV with:
+CSV output relies on ~bean-report~ tool provided by ~beancount~. Follow above steps
+to generate ~output.beancount~, then convert with:
 
 #+begin_src sh
 bean-report -f csv -o /path/to/output.csv /path/to/output.beancount journal
