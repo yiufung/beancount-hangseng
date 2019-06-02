@@ -7,9 +7,13 @@ obtained through `bean-report` afterwards.
 
 Currently only **Savings** account is supported.
 
+## Installation
+
+    pip install beancount-hangseng
+
 ## Beancount
 
-1.  Add `hangseng_pdf` importer to your import config (See [config.py](https://github.com/yiufung/beancount-hangseng/blob/master/config.py))
+1.  Import `HangSengSavingsImporter` to your import config (See [config.py](https://github.com/yiufung/beancount-hangseng/blob/master/config.py))
 2.  Run `bean-extract config.py /path/to/eStatement.pdf > output.beancount`
 
 ## CSV
