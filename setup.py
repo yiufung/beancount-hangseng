@@ -5,10 +5,10 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="beancount-hangseng",
-    version="0.0.6",
+    version="0.0.7",
     author="Cheong Yiu Fung",
     author_email="mail@yiufung.net",
-    description="Imports Hang Seng Integrated Account eStatements to beancount",
+    description="Parse Hang Seng eStatements to Beancount/CSV",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/yiufung/beancount-hangseng",
