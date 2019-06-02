@@ -1,4 +1,4 @@
-"""Importer for PDF statement from HangSeng Bank in Hong Kong.
+"""Importer for PDF statement from Hang Seng Bank in Hong Kong.
 
 Depends on external library pdftotext, which in many OS is packaged under poppler
 """
