@@ -7,5 +7,5 @@ from beancount.ingest import extract
 from beancount_hangseng import HangSengSavingsImporter
 
 CONFIG = [
-    HangSengSavingsImporter("Assets:HK:HangSeng:Savings")
+    HangSengSavingsImporter("Assets:HK:HangSeng:Savings", "HKD")
 ]

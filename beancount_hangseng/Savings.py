@@ -20,8 +20,9 @@ from beancount_hangseng import utils
 class HangSengSavingsImporter(importer.ImporterProtocol):
     """An importer for Hang Seng Bank PDF statements."""
 
-    def __init__(self, account_filing):
+    def __init__(self, account_filing, currency):
         self.account_filing = account_filing
+        self.currency = currency
 
     def identify(self, f):
         # HangSeng should only have PDF eStatement
@@ -96,8 +97,8 @@ class HangSengSavingsImporter(importer.ImporterProtocol):
                 )
                 txn.postings.append(
                     data.Posting(
-                        account="Assets:HangSeng:Savings",  # TODO User to define account name
-                        units=amount.Amount(trans_amount, 'HKD'),  # TODO User to define currency
+                        account=self.account_filing,
+                        units=amount.Amount(trans_amount, self.currency),
                         cost=None,
                         price=None,
                         flag=None,

@@ -15,3 +15,4 @@ beancount-venv/*
 /dist
 /beancount_hangseng.egg-info
 /README.org
+/tests/savings/
