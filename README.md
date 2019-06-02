@@ -26,3 +26,9 @@ export as CSV. Currently only **Savings** account is supported.
 ## CSV
 
     python -m beancount_hangseng -o output.csv /path/to/statement.pdf
+
+---
+
+>  "Therefore I say unto you, Take no thought for your life, what ye shall eat,
+>  or what ye shall drink; nor yet for your body, what ye shall put on. Is not
+>  the life more than meat, and the body than raiment?" -- Matthew 6:25
