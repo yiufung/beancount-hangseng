@@ -6,3 +6,8 @@
 /my.import
 *.pyc
 beancount-venv/*
+/beancount_hangseng/sample1.pdf
+/beancount_hangseng/sample1.pdf.extract
+/beancount_hangseng/sample1.pdf.file_account
+/beancount_hangseng/sample1.pdf.file_date
+/beancount_hangseng/sample1.pdf.file_name
