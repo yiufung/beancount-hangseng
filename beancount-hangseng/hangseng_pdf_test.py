@@ -1,6 +1,6 @@
 """Unit tests for Hang Seng PDF importer (using pytest)."""
 __copyright__ = "Copyright (C) 2019 Cheong Yiu Fung"
-__license__ = "GNU GPLv2"
+__license__ = "GNU GPLv3"
 
 from os import path
 import pytest

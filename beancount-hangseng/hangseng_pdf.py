@@ -3,7 +3,7 @@
 Depends on external library pdftotext, which in many OS is packaged under poppler
 """
 __copyright__ = "Copyright (C) 2019 Cheong Yiu Fung"
-__license__ = "GNU GPLv2"
+__license__ = "GNU GPLv3"
 
 import re
 import subprocess
