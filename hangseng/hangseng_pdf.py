@@ -1,6 +1,6 @@
 """Importer for PDF statement from HangSeng Bank in Hong Kong.
 
-Depends on external library pdftotext, which in many OS are packaged under poppler
+Depends on external library pdftotext, which in many OS is packaged under poppler
 """
 __copyright__ = "Copyright (C) 2019 Cheong Yiu Fung"
 __license__ = "GNU GPLv2"
@@ -46,7 +46,7 @@ def pdf_to_text(filename):
 
 
 class Importer(importer.ImporterProtocol):
-    """An importer for ACME Bank PDF statements."""
+    """An importer for Hang Seng Bank PDF statements."""
 
     def __init__(self, account_filing):
         self.account_filing = account_filing
