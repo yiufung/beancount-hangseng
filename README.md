@@ -27,11 +27,4 @@ Currently only **Savings** account is supported.
 
 ## CSV
 
-CSV output relies on `bean-report` tool provided by `beancount`. Follow above
-steps to generate `output.beancount`, then convert with:
-
-    bean-report -f csv -o /path/to/output.csv /path/to/output.beancount journal
-
-Note: In Unix system, output csv may have `^M` control character and/or empty
-lines. Use `dos2unix` or `sed` to remove them.
-
+    python -m beancount_hangseng -o output.csv /path/to/statement.pdf
