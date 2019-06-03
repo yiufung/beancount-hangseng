@@ -28,7 +28,7 @@ def main():
 
     with open(args.output, mode='w') as csv_file:
         csv_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        csv_writer.writerow(["date", "account", "amount"])
+        csv_writer.writerow(["date", "title", "amount"])
         for txn in allrecords:
             csv_writer.writerow([txn.date.isoformat(), txn.payee, txn.postings[0].units])
         return 0
