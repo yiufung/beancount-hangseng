@@ -79,12 +79,13 @@ class HangSengSavingsImporter(importer.ImporterProtocol):
                 continue  # Skip the first and last row
 
             trans_title = ' '.join([trans_title, ' '.join(title.split())])
+
             if self.debug:
                 print("{0: >10} {1: >30} Deposit: {2: >15} Withdraw: {3: >15}  Balance: {4: >15}".format(post_date, title, deposit, withdraw, balance))
             if post_date:  # update transaction date
                 trans_date = datetime.strptime(post_date, '%d %b')
                 # Cross-year handling
-                if statement_date.month == 'Jan' and trans_date.month == 'Dec':
+                if statement_date.month == 1 and trans_date.month == 12:
                     trans_date = trans_date.replace(year=statement_date.year - 1).date()
                 else:
                     trans_date = trans_date.replace(year=statement_date.year).date()
