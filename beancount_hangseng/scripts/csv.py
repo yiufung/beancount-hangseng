@@ -23,12 +23,10 @@ def main():
                         Number of bytes expected for each field of Date(11),
                         Title(58), Deposit(35), Withdraw(25), and Balance(24).
 
-                        Adjust each number to fit them to your statement (hint:
-                        use --verbose option).
-
-                        If you find yourself re-adjusting this option
-                        frequently, file an issue on project homepage to suggest
-                        a better default value.""")
+                        Default value is set based on my 3-year statements and
+                        should work fine in most cases. If it doesn't work as
+                        expected, use `--verbose` option and adjust the format
+                        string until an aligned table is printed out.""")
     parser.add_argument('-v', '--verbose', default=False, action="store_true",
                         help="Print details.")
     parser.add_argument('filename', help='PDF eStatement to process.')
