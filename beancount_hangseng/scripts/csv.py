@@ -24,7 +24,7 @@ def main():
     parser.add_argument('-o', '--output', default=None,
                         help="Output file path (For single file input only)")
     parser.add_argument('-d', '--directory', default=".",
-                         help="Export directory (create if not exists). Default in current directory.")
+                        help="Export to an existing directory. Default in current directory.")
     parser.add_argument('-f', '--format', default='11s58s35s25s24s',
                         help="""Default: 11s58s35s25s24s.
 

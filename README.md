@@ -32,8 +32,8 @@ as beancount or CSV. Only **Savings** account is supported at the moment.
 If statements are already downloaded in one folder, you may process and verify
 output in one go:
 
-    # cd /path/to/output_dir
-    # beancount-hangseng-csv -v /path/to/HangSeng_*.pdf
+    cd /path/to/output_dir
+    beancount-hangseng-csv -v /path/to/HangSeng_*.pdf
 
 Run `beancount-hangseng-csv -h` for more options and debug suggestions.
 
