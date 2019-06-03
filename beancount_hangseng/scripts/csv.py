@@ -25,8 +25,6 @@ def main():
                         help="Output file path (For single file input only)")
     parser.add_argument('-d', '--directory', default=".",
                          help="Export directory (create if not exists). Default in current directory.")
-    parser.add_argument('-c', '--currency', default="HKD",
-                        help="Currency in output file")
     parser.add_argument('-f', '--format', default='11s58s35s25s24s',
                         help="""Default: 11s58s35s25s24s.
 
@@ -47,14 +45,14 @@ def main():
 
     for stmt in args.file:
         print("Processing: {}".format(stmt))
-        allrecords = HangSengSavingsImporter("Assets:HK:HangSeng:Savings", args.currency, args.format, args.verbose).extract(_FileMemo(stmt))
+        allrecords = HangSengSavingsImporter("Dummy:Account:Name", "Dummy", args.format, args.verbose).extract(_FileMemo(stmt))
         output_path = args.output if args.output else path.join(args.directory, path.splitext(path.basename(stmt))[0] + ".csv")
         print("Exporting to {}".format(output_path))
         with open(output_path, mode='w') as csv_file:
             csv_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             csv_writer.writerow(["date", "title", "amount"])
             for txn in allrecords:
-                csv_writer.writerow([txn.date.isoformat(), txn.payee, txn.postings[0].units])
+                csv_writer.writerow([txn.date.isoformat(), txn.payee, txn.postings[0].units.number])
     return 0
 
 
