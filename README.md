@@ -16,16 +16,26 @@ as beancount or CSV. Only **Savings** account is supported at the moment.
 
         pip install beancount-hangseng
 
-## Beancount
+## Usage
+
+### Beancount
 
 1.  Add `HangSengSavingsImporter` to your import config (See
     [config.py](https://github.com/yiufung/beancount-hangseng/blob/master/config.py)
     for example)
 2.  Run `bean-extract config.py /path/to/eStatement.pdf > output.beancount`
 
-## CSV
+### CSV
 
     beancount-hangseng-csv -o output.csv /path/to/statement.pdf
+
+If statements are already downloaded in one folder, you may process and verify
+output in one go:
+
+    # cd /path/to/output_dir
+    # beancount-hangseng-csv -v /path/to/HangSeng_*.pdf
+
+Run `beancount-hangseng-csv -h` for more options and debug suggestions.
 
 ## Credits
 
