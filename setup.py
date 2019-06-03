@@ -32,7 +32,10 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/yiufung/beancount-hangseng",
     install_requires=['beancount'],
-    packages=setuptools.find_packages("."),
+    packages=[
+        'beancount_hangseng',
+        'beancount_hangseng.scripts'
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "Topic :: Office/Business :: Financial :: Accounting",
