@@ -24,7 +24,7 @@ else:
 
 setuptools.setup(
     name="beancount-hangseng",
-    version="0.1.5",
+    version="0.2.0",
     author="Cheong Yiu Fung",
     author_email="mail@yiufung.net",
     description="Parse Hang Seng eStatements to Beancount/CSV",
