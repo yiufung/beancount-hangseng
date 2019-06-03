@@ -27,6 +27,11 @@ as beancount or CSV. Only **Savings** account is supported at the moment.
 
     beancount-hangseng-csv -o output.csv /path/to/statement.pdf
 
+## Credits
+
+Inspired by @dictcp's
+[Gist](https://gist.github.com/dictcp/cd9e3028b9b873663ff0).
+
 ---
 
 >  "Therefore I say unto you, Take no thought for your life, what ye shall eat,
