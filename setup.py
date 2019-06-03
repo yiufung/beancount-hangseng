@@ -1,7 +1,26 @@
 import setuptools
+import platform
+from os import path
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
+
+# Explicitly list the scripts to install.
+binaries = [
+    ('beancount-hangseng-csv', 'beancount_hangseng.scripts.csv')
+]
+
+setup_extra_kwargs = {}
+if platform.system() == 'Windows':
+    setup_extra_kwargs.update(entry_points={
+        'console_scripts': [
+            '{} = {}:main'.format(binary, module)
+            for binary, module in binaries]
+    })
+else:
+    setup_extra_kwargs.update(scripts=[
+        path.join('bin', binary)
+        for binary, _ in binaries])
 
 setuptools.setup(
     name="beancount-hangseng",
@@ -21,4 +40,5 @@ setuptools.setup(
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
     ],
+    **setup_extra_kwargs
 )

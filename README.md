@@ -25,7 +25,7 @@ as beancount or CSV. Only **Savings** account is supported at the moment.
 
 ## CSV
 
-    python -m beancount_hangseng -o output.csv /path/to/statement.pdf
+    beancount-hangseng-csv -o output.csv /path/to/statement.pdf
 
 ---
 
