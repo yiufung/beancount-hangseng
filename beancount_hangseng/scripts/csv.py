@@ -18,15 +18,20 @@ def main():
     parser.add_argument('-c', '--currency', default="HKD",
                         help="Currency in output file")
     parser.add_argument('-f', '--format', default='11s58s29s31s24s',
-                        help="""Number of bytes expected for each field of Date(11), Title(58), Deposit(29),
-                        Withdraw(31), and Balance(24). Adjust each number to fit
-                        them to your statement (hint: use --verbose option). If
-                        you need to specify this option frequently, file an
-                        issue on project homepage to suggest a better default
-                        value.""")
-    parser.add_argument('-v', '--verbose', default=False,
-                        help="Print details."
-    parser.add_argument('filename', help='PDF eStatement to load.')
+                        help="""Default: 11s58s29s31s24s.
+
+                        Number of bytes expected for each field of Date(11),
+                        Title(58), Deposit(29), Withdraw(31), and Balance(24).
+
+                        Adjust each number to fit them to your statement (hint:
+                        use --verbose option).
+
+                        If you find yourself re-adjusting this option
+                        frequently, file an issue on project homepage to suggest
+                        a better default value.""")
+    parser.add_argument('-v', '--verbose', default=False, action="store_true",
+                        help="Print details.")
+    parser.add_argument('filename', help='PDF eStatement to process.')
 
     args = parser.parse_args()
     allrecords = HangSengSavingsImporter("Assets:HK:HangSeng:Savings", args.currency, args.format, args.verbose).extract(_FileMemo(args.filename))
