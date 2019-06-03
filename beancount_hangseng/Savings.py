@@ -20,10 +20,12 @@ from beancount_hangseng import utils
 class HangSengSavingsImporter(importer.ImporterProtocol):
     """An importer for Hang Seng Bank PDF statements."""
 
-    def __init__(self, account_filing, currency, debug=False):
+    def __init__(self, account_filing, currency, unpack_format='11s58s29s31s24s', debug=False):
         self.account_filing = account_filing
         self.currency = currency
+        self.unpack_format = unpack_format
         self.debug = debug
+        self.pad_width = sum([int(x) for x in self.unpack_format.split('s')[:-1]])
 
     def identify(self, f):
         if f.mimetype() != 'application/pdf':
@@ -72,7 +74,7 @@ class HangSengSavingsImporter(importer.ImporterProtocol):
             # A heuristic unpack approach to get all fields. Strip spaces for
             # easier post-process.
             line = lines[line_no]
-            post_date, title, deposit, withdraw, balance = [x.decode().strip() for x in struct.unpack('11s58s29s31s24s', str.encode(line.ljust(153)))]
+            post_date, title, deposit, withdraw, balance = [x.decode().strip() for x in struct.unpack(self.unpack_format, str.encode(line.ljust(self.pad_width)))]
             trans_title = ' '.join([trans_title, ' '.join(title.split())])
             if self.debug:
                 print("{0: >10} {1: >30} Deposit: {2: >15} Withdraw: {3: >15}  Balance: {4: >15}".format(post_date, title, deposit, withdraw, balance))
