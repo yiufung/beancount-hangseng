@@ -20,7 +20,7 @@ from beancount_hangseng import utils
 class HangSengSavingsImporter(importer.ImporterProtocol):
     """An importer for Hang Seng Bank PDF statements."""
 
-    def __init__(self, account_filing, currency, unpack_format='11s58s29s31s24s', debug=False):
+    def __init__(self, account_filing, currency, unpack_format='11s58s35s25s24s', debug=False):
         self.account_filing = account_filing
         self.currency = currency
         self.unpack_format = unpack_format
@@ -41,7 +41,7 @@ class HangSengSavingsImporter(importer.ImporterProtocol):
         # Each section of account begins with "Integrated Account Statement
         # Savings". Extract everything non-greedily (*?) until there's a page
         # break (\n\n\n), or when it ends with the row of "Transaction Summary"
-        SAVINGS_REGEXP = "Integrated Account Statement Savings\n.*\n.*\n\n(?P<record>(.|\n)*?)(?=\n\n\n\n|Transaction Summary)"
+        SAVINGS_REGEXP = "Integrated Account Statement Savings\n.*\n.*\n\n(?P<record>(.|\n)*?)(?=\n\n|Transaction Summary|Credit Interest Accrued)"
         allmatches = re.findall(SAVINGS_REGEXP, text)
         # For each match result, the 2nd group is the ending page break or
         # 'Transaction Summary', which we don't need.

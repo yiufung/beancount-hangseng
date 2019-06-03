@@ -17,11 +17,11 @@ def main():
                         help="Output path")
     parser.add_argument('-c', '--currency', default="HKD",
                         help="Currency in output file")
-    parser.add_argument('-f', '--format', default='11s58s29s31s24s',
-                        help="""Default: 11s58s29s31s24s.
+    parser.add_argument('-f', '--format', default='11s58s35s25s24s',
+                        help="""Default: 11s58s35s25s24s.
 
                         Number of bytes expected for each field of Date(11),
-                        Title(58), Deposit(29), Withdraw(31), and Balance(24).
+                        Title(58), Deposit(35), Withdraw(25), and Balance(24).
 
                         Adjust each number to fit them to your statement (hint:
                         use --verbose option).
