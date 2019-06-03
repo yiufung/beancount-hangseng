@@ -75,6 +75,9 @@ class HangSengSavingsImporter(importer.ImporterProtocol):
             # easier post-process.
             line = lines[line_no]
             post_date, title, deposit, withdraw, balance = [x.decode().strip() for x in struct.unpack(self.unpack_format, str.encode(line.ljust(self.pad_width)))]
+            if title == "B/F BALANCE" or title == "C/F BALANCE":
+                continue  # Skip the first and last row
+
             trans_title = ' '.join([trans_title, ' '.join(title.split())])
             if self.debug:
                 print("{0: >10} {1: >30} Deposit: {2: >15} Withdraw: {3: >15}  Balance: {4: >15}".format(post_date, title, deposit, withdraw, balance))
