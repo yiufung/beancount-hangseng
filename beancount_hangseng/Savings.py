@@ -8,7 +8,7 @@ __license__ = "GNU GPLv3"
 import struct
 import re
 from beancount.ingest import importer
-from beancount.core import amount
+from beancount.core.amount import Amount
 from beancount.core import data
 from beancount.core import flags
 from beancount.core.number import D
@@ -104,7 +104,7 @@ class HangSengSavingsImporter(importer.ImporterProtocol):
                 txn.postings.append(
                     data.Posting(
                         account=self.account_filing,
-                        units=amount.Amount(trans_amount, self.currency),
+                        units=Amount(trans_amount, self.currency),
                         cost=None,
                         price=None,
                         flag=None,

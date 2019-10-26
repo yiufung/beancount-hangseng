@@ -8,10 +8,10 @@ import pytest
 from beancount.ingest import regression_pytest as regtest
 from beancount_hangseng import HangSengSavingsImporter, utils
 
-SAVINGS_IMPORTER = HangSengSavingsImporter("Assets:HK:HangSeng:Savings", "HKD", debug=True)
+TEST_IMPORTER = HangSengSavingsImporter("Assets:HK:HangSeng:Savings", "HKD", debug=True)
 @pytest.mark.skipif(not utils.is_pdftotext_installed(),
                     reason="beancount_hangseng depends on pdftotext. Please install.")
-@regtest.with_importer(SAVINGS_IMPORTER)
+@regtest.with_importer(TEST_IMPORTER)
 @regtest.with_testdir(path.join(path.dirname(__file__), "savings"))
 class TestSavingsImporter(regtest.ImporterTestBase):
     pass
