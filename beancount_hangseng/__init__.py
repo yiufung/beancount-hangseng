@@ -1,2 +1,3 @@
 from beancount_hangseng.utils import *
 from beancount_hangseng.Savings import HangSengSavingsImporter
+from beancount_hangseng.MPowerMasterCard import MPowerMasterImporter

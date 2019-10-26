@@ -16,3 +16,4 @@ beancount-venv/*
 /beancount_hangseng.egg-info
 /README.org
 /tests/savings/
+tests/mpower/*
