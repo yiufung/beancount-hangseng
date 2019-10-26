@@ -20,7 +20,7 @@ from beancount_hangseng import utils
 class MPowerMasterImporter(importer.ImporterProtocol):
     """An importer for Hang Seng M-Power Master Card PDF statements."""
 
-    def __init__(self, account_filing, currency, unpack_format='11s12s78s46s', debug=False):
+    def __init__(self, account_filing, currency, *, unpack_format='11s12s78s46s', debug=False):
         self.account_filing = account_filing
         self.currency = currency
         self.unpack_format = unpack_format
@@ -96,44 +96,46 @@ Sample output of the corpus:
         lines = [' '.join(l[:34].split())+l[34:] for l in lines]
         # Remove empty strings '' from list
         lines = list(filter(None, [l.rstrip() for l in lines]))
-        print('\n'.join(lines))
+        if self.debug:
+            print('\n'.join(lines))
+            print("padwidth: {}".format(self.pad_width))
+            print("Account: {}".format(self.file_account(f)))
         # Prepare variables
-        entries = []      #
-        trans_title = ''  # Initialize title
-        print('ACTUAL: ------------------------------------------------------------')
-        print("padwidth: {}".format(self.pad_width))
-        print("Account: {}".format(self.file_account(f)))
+        entries = []
+        narration = ''  # Initialize narration
         for line_no in range(len(lines)):
             line = lines[line_no]
-            print("Line: {}".format(line))
+            if self.debug:
+                print("Line: {}".format(line))
 
             # If starts with a digit, it indicates a date line so we parse it
             if line[0].isdigit():
-                str_trans_date, str_post_date, activity, str_amount = [x.decode().strip() for x in struct.unpack(self.unpack_format, str.encode(line.ljust(self.pad_width)))]
+                str_txn_date, str_post_date, activity, str_amount = [x.decode().strip() for x in struct.unpack(self.unpack_format, str.encode(line.ljust(self.pad_width)))]
                 if self.debug:
-                    print("{0: >10} {1: >10} activity {2: >20} amount {3: >15}".format(str_trans_date, str_post_date, activity, str_amount))
-                post_date = datetime.strptime(str_post_date, "%d %b %Y")
+                    print("{0: >10} {1: >10} activity {2: >20} amount {3: >15}".format(str_txn_date, str_post_date, activity, str_amount))
+                post_date = datetime.strptime(str_post_date, "%d %b %Y").date()
+                txn_date = datetime.strptime(str_txn_date, "%d %b %Y").date()
                 amount = str_amount.replace(",", "")
-                trans_amount = -D(amount) if amount[-1] != '-' else D(amount[:-1])
+                txn_amount = -D(amount) if amount[-1] != '-' else D(amount[:-1])
 
-            # Whether it's a real line or not, transaction title is concatenation of all activities
-            trans_title = ' '.join([trans_title, ' '.join(activity.split())])
+            # Whether it's a real line or not, transaction narration is concatenation of all activities
+            narration = ' '.join([narration, ' '.join(activity.split())])
 
             # Only create the new transaction when we see the next line starts
             # with a digit (indicating that's next transaction), or when we're
             # at the last line already.
             if line_no == (len(lines) - 1) or lines[line_no + 1][0].isdigit():
-                entries.append(self.create_txn(f, line_no, trans_title.strip(), post_date, trans_amount))
-                trans_title = ''  # Reset title for next transaction
+                entries.append(self.create_txn(f, line_no, narration.strip(), post_date, txn_date, txn_amount))
+                narration = ''  # Reset title for next transaction
         return entries
 
-    def create_txn(self, f, line_no, payee, date, amount):
+    def create_txn(self, f, line_no, narration, post_date, txn_date, amount):
         txn = data.Transaction(
-            meta=data.new_metadata(f.name, line_no),
-            payee=payee,
-            date=date,  # We only create transaction when we
+            meta=data.new_metadata(f.name, line_no, kvlist={'txn_date': txn_date}),
+            payee="",
+            date=post_date,
             flag=flags.FLAG_OKAY,
-            narration="",
+            narration=narration,
             tags=set(),
             links=set(),
             postings=[],
@@ -145,7 +147,7 @@ Sample output of the corpus:
                 cost=None,
                 price=None,
                 flag=None,
-            meta=None
+                meta=None
             )
         )
         return txn

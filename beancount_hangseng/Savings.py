@@ -20,7 +20,7 @@ from beancount_hangseng import utils
 class HangSengSavingsImporter(importer.ImporterProtocol):
     """An importer for Hang Seng Bank PDF statements."""
 
-    def __init__(self, account_filing, currency, unpack_format='11s58s35s25s24s', debug=False):
+    def __init__(self, account_filing, currency, *, unpack_format='11s58s35s25s24s', debug=False):
         self.account_filing = account_filing
         self.currency = currency
         self.unpack_format = unpack_format
