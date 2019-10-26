@@ -1,4 +1,4 @@
-import setuptools
+from setuptools import setup, find_packages
 import platform
 from os import path
 
@@ -22,7 +22,7 @@ else:
         path.join('bin', binary)
         for binary, _ in binaries])
 
-setuptools.setup(
+setup(
     name="beancount-hangseng",
     version="0.2.1",
     author="Cheong Yiu Fung",
@@ -32,6 +32,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/yiufung/beancount-hangseng",
     install_requires=['beancount'],
+    # pacakges=find_packages(),
     packages=[
         'beancount_hangseng',
         'beancount_hangseng.scripts'
