@@ -24,7 +24,7 @@ else:
 
 setup(
     name="beancount-hangseng",
-    version="0.3.0",
+    version="0.4.0",
     author="Cheong Yiu Fung",
     author_email="mail@yiufung.net",
     description="Parse Hang Seng eStatements to Beancount/CSV",
