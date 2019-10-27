@@ -1,9 +1,10 @@
-# Beancount/CSV parser for Hang Seng e-Statement
+# Beancount/CSV parser for Hang Seng e-Statement / MPower MasterCard
 
 [![PyPI version fury.io](https://badge.fury.io/py/beancount-hangseng.svg)](https://pypi.python.org/pypi/beancount-hangseng/)
 
-Parse Hang Seng (Hong Kong) Integrated Account e-Statement PDF, output results
-as beancount or CSV. Only **Savings** account is supported at the moment.
+Parse Hang Seng (Hong Kong) Integrated Account e-Statement PDF / MPower
+MasterCard, output results as beancount or CSV. For Hang Seng Integrated Account
+eStatements, only **Savings** account is supported at the moment.
 
 ## Installation
 
@@ -20,27 +21,25 @@ as beancount or CSV. Only **Savings** account is supported at the moment.
 
 ### Beancount
 
-1.  Add `HangSengSavingsImporter` to your import config (See
-    [config.py](https://github.com/yiufung/beancount-hangseng/blob/master/config.py)
-    for example)
+1.  Add `HangSengSavingsImporter`/`MPowerMasterImporter` to your import config
+    (See [config.py](https://github.com/yiufung/beancount-hangseng/blob/master/config.py) for example)
 2.  Run `bean-extract config.py /path/to/eStatement.pdf > output.beancount`
 
 ### CSV
 
-    beancount-hangseng-csv -o output.csv /path/to/statement.pdf
+    beancount-hangseng-csv -o output.csv -f {hangseng,mpower} /path/to/statement.pdf
 
 If statements are already downloaded in one folder, you may process and verify
 output in one go:
 
     cd /path/to/output_dir
-    beancount-hangseng-csv -v /path/to/HangSeng_*.pdf
+    beancount-hangseng-csv -t {hangseng, mpower} -v /path/to/HangSeng_*.pdf -d /tmp/
 
 Run `beancount-hangseng-csv -h` for more options and debug suggestions.
 
 ## Credits
 
-Inspired by @dictcp's
-[Gist](https://gist.github.com/dictcp/cd9e3028b9b873663ff0).
+Inspired by @dictcp's [Gist](https://gist.github.com/dictcp/cd9e3028b9b873663ff0).
 
 ---
 
