@@ -11,6 +11,7 @@ import sys
 from beancount.ingest.cache import _FileMemo
 from beancount_hangseng.Savings import HangSengSavingsImporter
 from beancount_hangseng.MPowerMasterCard import MPowerMasterImporter
+from beancount_hangseng.DBS import DBSImporter
 
 
 class CsvParser(argparse.ArgumentParser):
@@ -40,7 +41,7 @@ def main():
     parser.add_argument('-t', '--type',
                         help="""Type of PDF.
 
-                        Available types: HangSeng, MPower.""")
+                        Available types: HangSeng, MPower, DBS.""")
     parser.add_argument('-v', '--verbose', default=False, action="store_true",
                         help="More details.")
     parser.add_argument('file', nargs='+', help='One or more PDF eStatements to process.')
@@ -55,6 +56,8 @@ def main():
             allrecords = HangSengSavingsImporter("Dummy:Account:Name", "Dummy", debug=args.verbose).extract(_FileMemo(stmt))
         elif args.type.lower() == 'mpower':
             allrecords = MPowerMasterImporter("Dummy:Account:Name", "Dummy", debug=args.verbose).extract(_FileMemo(stmt))
+        elif args.type.lower() == 'dbs':
+            allrecords = DBSImporter("Dummy:Account:Name", "Dummy", debug=args.verbose).extract(_FileMemo(stmt))
         output_path = args.output if args.output else path.join(args.directory, path.splitext(path.basename(stmt))[0] + ".csv")
         print("Exporting to {}".format(output_path))
 
@@ -68,6 +71,11 @@ def main():
                 csv_writer.writerow(["trans_date", "post_date", "activity", "amount"])
                 for txn in allrecords:
                     csv_writer.writerow([txn.meta['txn_date'], txn.date.isoformat(), txn.narration, txn.postings[0].units.number])
+            elif args.type.lower() == 'dbs':
+                csv_writer.writerow(["trans_date", "post_date", "description", "amount"])
+                for txn in allrecords:
+                    csv_writer.writerow([txn.meta['txn_date'], txn.date.isoformat(), txn.narration, txn.postings[0].units.number])
+
     return 0
 
 
